@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +24,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
@@ -32,6 +38,7 @@ public class OurVideoActivity extends AppCompatActivity {
 ListView listView;
     ArrayList<Video>videoAry;
     MyArrayAdapter adapter;
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +51,21 @@ ListView listView;
     @Override
     protected void onResume() {
         super.onResume();
+        linearLayout= (LinearLayout) findViewById(R.id.linearvideo);
+        Firebase backgroundref =new Firebase("https://frenchstudio-98610.firebaseio.com/background_video");
+        backgroundref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Bitmap btGmap=decodeBase64(dataSnapshot.getValue(String.class));
+                BitmapDrawable bitmapDrawableGmap=new BitmapDrawable(btGmap);
+                linearLayout.setBackground(bitmapDrawableGmap);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
         videoAry=new ArrayList<Video>();
         listView= (ListView) findViewById(R.id.listView);
         adapter=new MyArrayAdapter(this,R.layout.video_list_item,videoAry);
@@ -53,6 +75,8 @@ ListView listView;
 
     }
 
+
+//    youtube
     public static void playinwindow(Context context, String url, Activity activity) {
 
         Intent myintent = null;
@@ -68,7 +92,6 @@ ListView listView;
             }
         }
     }
-
     private static boolean canResolveIntent(Intent intent, Activity activity) {
         List<ResolveInfo> resolveInfo = activity.getPackageManager().queryIntentActivities(intent, 0);
         return resolveInfo != null && !resolveInfo.isEmpty();
@@ -90,7 +113,7 @@ ListView listView;
         }
 
     }
-
+//
 
 
     private ChildEventListener reflis=new ChildEventListener() {
@@ -131,6 +154,8 @@ String st=dataSnapshot.getKey();
 
         }
     };
+
+
 public class MyArrayAdapter extends ArrayAdapter<Video>{
    private Context context;
     private int resource;
@@ -162,4 +187,9 @@ public class MyArrayAdapter extends ArrayAdapter<Video>{
     }
 }
 
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
 }
