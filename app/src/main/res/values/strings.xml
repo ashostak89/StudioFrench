@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StudioFrench</string>
+    <string name="our_video">הוידיאו שלנו</string>
+    <string name="prices">מחירון</string>
+    <string name="prices_url">https://frenchstudio-98610.firebaseio.com/priceHW</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
+
 </resources>

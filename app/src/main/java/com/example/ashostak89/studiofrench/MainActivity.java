@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,67 +31,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView ivWaze;
     ImageView ivPhone;
     ImageView ivHome;
-
+    String urlGmap="";
+    String urlWaze="";
+    String urlPhoneNum="";
+    String urlHomePage="";
+    Button btnOurVideo;
+    Button btnPrices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ivGMap= (ImageView) findViewById(R.id.ivgmap);
         ivWaze= (ImageView) findViewById(R.id.ivwaze);
         ivPhone= (ImageView) findViewById(R.id.ivphone);
         ivHome= (ImageView) findViewById(R.id.ivhome);
-         ivGMap.setOnClickListener(this);
-         ivWaze.setOnClickListener(this);
-         ivPhone.setOnClickListener(this);
-         ivHome.setOnClickListener(this);
-    }
+        ivGMap.setOnClickListener(this);
+        ivWaze.setOnClickListener(this);
+        ivPhone.setOnClickListener(this);
+        ivHome.setOnClickListener(this);
+        linearLayout= (LinearLayout) findViewById(R.id.linear);
+        linearLogo= (LinearLayout) findViewById(R.id.linearlogo);
+        btnOurVideo= (Button) findViewById(R.id.btnvideo);
+        btnOurVideo.setOnClickListener(this);
+        btnPrices= (Button) findViewById(R.id.btnprice);
+        btnPrices.setOnClickListener(this);
 
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
         mRef =new Firebase("https://frenchstudio-98610.firebaseio.com");
-        mRefBackground=new Firebase("https://frenchstudio-98610.firebaseio.com/background");
-
-
-
-        linearLayout= (LinearLayout) findViewById(R.id.linear);
-        linearLogo= (LinearLayout) findViewById(R.id.linearlogo);
-
-mRef.child("logo").addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        String text=dataSnapshot.getValue(String.class);
-        Bitmap bt=decodeBase64(text);
-        BitmapDrawable bitmapDrawable=new BitmapDrawable(bt);
-        linearLogo.setBackground(bitmapDrawable);
-    }
-
-    @Override
-    public void onCancelled(FirebaseError firebaseError) {
+        mRef.child("logo").addValueEventListener( mRefValueEventListener);
+        mRef.child("background").addValueEventListener(mRefValueEventListener);
+        mRef.child("addressforgmap").addValueEventListener(mRefValueEventListener);
+        mRef.child("addressforwaze").addValueEventListener(mRefValueEventListener);
+        mRef.child("homepage").addValueEventListener(mRefValueEventListener);
+        mRef.child("phone").addValueEventListener(mRefValueEventListener);
 
     }
-});
-        mRefBackground.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String text=dataSnapshot.getValue(String.class);
-                Bitmap bt=decodeBase64(text);
-                BitmapDrawable bitmapDrawable=new BitmapDrawable(bt);
-                linearLayout.setBackground(bitmapDrawable);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
 
 
 
 
-    }
 
     public static Bitmap decodeBase64(String input)
     {
@@ -98,11 +81,15 @@ mRef.child("logo").addValueEventListener(new ValueEventListener() {
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
+
+
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ivgmap:
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=Balfour+2,+Haifa+Israel");
+                Uri gmmIntentUri = Uri.parse(urlGmap);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
@@ -112,7 +99,7 @@ mRef.child("logo").addValueEventListener(new ValueEventListener() {
             case R.id.ivwaze:
                 try
                 {
-                    String url = "geo: 32.810237, 34.997541";
+                    String url = urlWaze;
                     Intent wazeIntent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
                     startActivity( wazeIntent );
                 }
@@ -125,15 +112,55 @@ mRef.child("logo").addValueEventListener(new ValueEventListener() {
                 break;
             case R.id.ivphone:
                 Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
-                phoneIntent.setData(Uri.parse("tel:0522885275"));
+                phoneIntent.setData(Uri.parse("tel:"+urlPhoneNum));
                 startActivity(phoneIntent);
                 break;
             case R.id.ivhome:
-                String url = "http://studio-french.com/";
+                String url = urlHomePage;
                 Intent homeIntent = new Intent(Intent.ACTION_VIEW);
                 homeIntent.setData(Uri.parse(url));
                 startActivity(homeIntent);
                 break;
+            case R.id.btnvideo:
+                Intent ourVideoIntent=new Intent(MainActivity.this,OurVideoActivity.class);
+                startActivity(ourVideoIntent);
+                break;
+            case R.id.btnprice:
+                Intent pricesIntent=new Intent(MainActivity.this,PricesActivity.class);
+                startActivity(pricesIntent);
+                break;
         }
     }
+
+    private ValueEventListener mRefValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            String text=dataSnapshot.getValue(String.class);
+            switch (dataSnapshot.getKey()){
+                case "background":
+                Bitmap btGmap=decodeBase64(text);
+                BitmapDrawable bitmapDrawableGmap=new BitmapDrawable(btGmap);
+                linearLayout.setBackground(bitmapDrawableGmap);
+                break;
+                case "logo":
+                    Bitmap btWaze=decodeBase64(text);
+                    BitmapDrawable bitmapDrawableWaze=new BitmapDrawable(btWaze);
+                    linearLogo.setBackground(bitmapDrawableWaze);
+                    break;
+                case "addressforgmap":
+urlGmap=text;
+                    break;
+                case "addressforwazec":
+urlWaze=text;
+                    break;
+                case "phone":
+urlPhoneNum=text;
+                    break;
+                case "homepage":
+urlHomePage=text;
+                    break;
+            }
+        }
+        @Override
+        public void onCancelled(FirebaseError firebaseError) {}};
 }

@@ -1,7 +1,5 @@
 package com.example.ashostak89.studiofrench;
 
-import android.app.Application;
-
 import com.firebase.client.Firebase;
 
 /**
@@ -13,5 +11,6 @@ public class FrenchStudio extends android.app.Application{
     public void onCreate() {
         super.onCreate();
         Firebase.setAndroidContext(this);
+
     }
 }
