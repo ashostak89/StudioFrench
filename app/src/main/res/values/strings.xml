@@ -4,6 +4,11 @@
     <string name="prices">מחירון</string>
     <string name="prices_url">https://frenchstudio-98610.firebaseio.com/priceHW</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="Specials">מבצעים</string>
+    <string name="username">על שם</string>
+    <string name="email">דואר אלקטרוני</string>
+    <string name="user_free_text">הטיפולים שתירצי / הערות</string>
+    <string name="tobuy">להזמנת תור</string>
 
 
 </resources>

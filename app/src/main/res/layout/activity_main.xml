@@ -13,43 +13,74 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="9"
-        android:id="@+id/linearlogo"></LinearLayout>
+        android:id="@+id/linearlogo"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#30E040FB"
             android:layout_weight="2">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/our_video"
-                android:id="@+id/btnvideo" />
+                android:id="@+id/btnvideo"
+                android:background="@drawable/buttonshape"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/color_white"/>
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/prices"
-                android:id="@+id/btnprice" />
+                android:id="@+id/btnprice"
+                android:background="@drawable/buttonshape"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/btnalert" />
+                android:textColor="@color/color_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/prices"
+                android:id="@+id/btnspec"
+                android:background="@drawable/buttonshape"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button4" />
+                android:textColor="@color/color_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tobuy"
+                android:id="@+id/btnbuy"
+                android:background="@drawable/buttonshape"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +94,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10">
+        android:layout_weight="10"
+        android:background="#30E040FB">
 
         <ImageView
             android:layout_width="match_parent"

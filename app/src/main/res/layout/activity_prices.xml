@@ -14,7 +14,9 @@
         android:id="@+id/textView5"
         android:text="@string/prices"
         android:layout_gravity="center_horizontal"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/text_logo_color"
+        android:layout_margin="20dp" />
 
     <ListView
         android:layout_width="match_parent"

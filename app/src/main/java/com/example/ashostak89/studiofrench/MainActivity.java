@@ -10,15 +10,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -42,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String urlHomePage="";
     Button btnOurVideo;
     Button btnPrices;
-    Button btnalert;
+    Button btnSpecials;
+    Button btnbuy;
     Handler h;
     ProgressDialog progressDialog;
     int j=0;
@@ -51,21 +49,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressDialog = ProgressDialog.show(MainActivity.this, null, null, true, false);
-        progressDialog.setContentView(R.layout.progress_layout);
+//        myFindViewByIdAndLiseners();
 
-        h = new Handler() {
-            public void handleMessage(Message msg) {
 
-                if (j < i) {
-                    j+=200;
-                    h.sendEmptyMessageDelayed(0, 500);
-                } else {
-                    progressDialog.dismiss();
-                }
-            }
-        };
-        h.sendEmptyMessageDelayed(0, 1000);
+
+        btnSpecials= (Button) findViewById(R.id.btnspec);
+        btnbuy = (Button) findViewById(R.id.btnbuy);
+        ivGMap= (ImageView) findViewById(R.id.ivgmap);
+        ivWaze= (ImageView) findViewById(R.id.ivwaze);
+        ivPhone= (ImageView) findViewById(R.id.ivphone);
+        ivHome= (ImageView) findViewById(R.id.ivhome);
+        ivGMap.setOnClickListener(MainActivity.this);
+        ivWaze.setOnClickListener(MainActivity.this);
+        ivPhone.setOnClickListener(MainActivity.this);
+        ivHome.setOnClickListener(MainActivity.this);
+        linearLayout= (LinearLayout) findViewById(R.id.linear);
+        linearLogo= (LinearLayout) findViewById(R.id.linearlogo);
+        btnOurVideo= (Button) findViewById(R.id.btnvideo);
+        btnOurVideo.setOnClickListener(MainActivity.this);
+        btnPrices= (Button) findViewById(R.id.btnprice);
+        btnPrices.setOnClickListener(MainActivity.this);
+
+
+//        progressDialog = new ProgressDialog(this,R.style.MyTheme);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+//        progressDialog.show();
+//        h = new Handler() {
+//            public void handleMessage(Message msg) {
+//                if (j < i) {
+//                    j+=2000;
+//                    h.sendEmptyMessageDelayed(0, 1000);
+//                } else {
+//                    progressDialog.dismiss();
+//                }
+//            }
+//        };
+//        h.sendEmptyMessageDelayed(0, 1000);
 
     }
 
@@ -73,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        myFindViewByIdAndLiseners();
+
         mRef =new Firebase("https://frenchstudio-98610.firebaseio.com");
         mRef.child("logo").addValueEventListener( mRefValueEventListener);
         mRef.child("background").addValueEventListener(mRefValueEventListener);
@@ -87,22 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void myFindViewByIdAndLiseners(){
-    ivGMap= (ImageView) findViewById(R.id.ivgmap);
-    ivWaze= (ImageView) findViewById(R.id.ivwaze);
-    ivPhone= (ImageView) findViewById(R.id.ivphone);
-    ivHome= (ImageView) findViewById(R.id.ivhome);
-    ivGMap.setOnClickListener(MainActivity.this);
-    ivWaze.setOnClickListener(MainActivity.this);
-    ivPhone.setOnClickListener(MainActivity.this);
-    ivHome.setOnClickListener(MainActivity.this);
-    linearLayout= (LinearLayout) findViewById(R.id.linear);
-    linearLogo= (LinearLayout) findViewById(R.id.linearlogo);
-    btnOurVideo= (Button) findViewById(R.id.btnvideo);
-    btnOurVideo.setOnClickListener(MainActivity.this);
-    btnPrices= (Button) findViewById(R.id.btnprice);
-    btnPrices.setOnClickListener(MainActivity.this);
-    btnalert= (Button) findViewById(R.id.btnalert);
-    btnalert.setOnClickListener(MainActivity.this);
+
 }
 
 
@@ -157,12 +162,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(ourVideoIntent);
                 break;
             case R.id.btnprice:
-                Intent pricesIntent=new Intent(MainActivity.this,PricesActivity.class);
-                startActivity(pricesIntent);
+//                Intent pricesIntent=new Intent(MainActivity.this,PricesActivity.class);
+//                startActivity(pricesIntent);
+                Intent emailIntent=new Intent(MainActivity.this,EmailActivity.class);
+                startActivity(emailIntent);
                 break;
-            case R.id.btnalert:
-//               new Worker(MainActivity.this);
+            case R.id.btnspec:
+                Intent specialIntent=new Intent(MainActivity.this,SpecialsActivity.class);
+                startActivity(specialIntent);
                 break;
+            case R.id.btnbuy:
+//                Intent emailIntent=new Intent(MainActivity.this,EmailActivity.class);
+//                startActivity(emailIntent);
+                break;
+
         }
     }
 
@@ -200,24 +213,3 @@ urlHomePage=text;
 }
 
 
-//    AlertDialog.Builder adb=new AlertDialog.Builder(this);
-//    LayoutInflater li = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//    View v1 = li.inflate(R.layout.alert_progressbar, null);
-//    ProgressBar pb= (ProgressBar) v1.findViewById(R.id.progressBar);
-//adb.setView(v1);
-//        adb.setCancelable(false);
-//        AlertDialog alert=adb.create();
-//        alert.show();
-//final long time=System.currentTimeMillis();
-//        for (int i=0;time+(DateUtils.SECOND_IN_MILLIS*10)>System.currentTimeMillis()&&i<5;i++){
-//
-//        try {
-//        Thread.sleep(1000);
-//
-//        } catch (InterruptedException e) {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//        }
-//        if (time+(DateUtils.SECOND_IN_MILLIS*4)<System.currentTimeMillis())
-//        alert.cancel();
-//        }

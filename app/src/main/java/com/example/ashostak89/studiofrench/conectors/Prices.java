@@ -1,4 +1,4 @@
-package com.example.ashostak89.studiofrench;
+package com.example.ashostak89.studiofrench.conectors;
 
 /**
  * Created by ashostak89 on 8/26/2016.

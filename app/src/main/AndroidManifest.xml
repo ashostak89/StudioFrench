@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ashostak89.studiofrench">
+    package="com.example.ashostak89.studiofrench" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,8 +10,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,24 @@
             </intent-filter>
         </activity>
         <activity android:name=".OurVideoActivity" />
-        <activity android:name=".PricesActivity"></activity>
+        <activity android:name=".PricesActivity" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseInstanceIDService" >
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".SpecialsActivity" />
+        <activity android:name=".EmailActivity" />
     </application>
 
 </manifest>

@@ -10,7 +10,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tvprocedureprice"
         android:gravity="bottom|center"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:maxLines="15"
+        android:singleLine="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,6 +23,8 @@
         android:gravity="bottom|center"
         android:layout_gravity="right"
         android:textColor="@color/color_white"
+        android:maxLines="15"
+        android:singleLine="false"
         />
 
     <TextView
@@ -30,7 +34,9 @@
         android:id="@+id/tvprocedurename"
         android:gravity="bottom|center"
         android:textColor="@color/color_white"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:maxLines="15"
+        android:singleLine="false"/>
 
 
 </LinearLayout>

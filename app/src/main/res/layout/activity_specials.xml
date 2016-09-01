@@ -5,22 +5,22 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:orientation="vertical"
-    android:id="@+id/linearvideo">
+    android:id="@+id/linearspecial">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/our_video"
-        android:id="@+id/textView"
+        android:text="@string/Specials"
+        android:id="@+id/textView6"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
         android:textColor="@color/text_logo_color"
+        android:gravity="center"
         android:layout_margin="20dp" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/special_lv"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
