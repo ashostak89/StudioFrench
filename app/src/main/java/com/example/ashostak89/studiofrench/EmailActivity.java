@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -59,16 +58,10 @@ public class EmailActivity extends AppCompatActivity {
     private View.OnClickListener sandlis=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            try {
-                GMailSender sender = new GMailSender("ashostak89@gmail.com", "andrei123");
-                sender.sendMail("This is Subject",
-                        "This is Body",
-                        "ashostak89@gmail.com",
-                        "ashostak89@gmail.com");
-                Log.d("SendMail", "???");
-            } catch (Exception e) {
-                Log.e("SendMail", e.getMessage(), e);
-            }
+
+
         }
     };
+
+
 }

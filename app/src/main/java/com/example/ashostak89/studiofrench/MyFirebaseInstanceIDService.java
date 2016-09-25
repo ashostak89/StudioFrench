@@ -1,7 +1,6 @@
 package com.example.ashostak89.studiofrench;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
@@ -18,7 +17,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("mylog", "Refreshed token: " + refreshedToken);
-        Toast.makeText(getApplicationContext(),refreshedToken,Toast.LENGTH_LONG).show();
+
 
 // We will Send this refreshedToken to our app server, so app
 // server can save it

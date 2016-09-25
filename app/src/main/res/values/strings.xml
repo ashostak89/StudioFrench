@@ -8,7 +8,13 @@
     <string name="username">על שם</string>
     <string name="email">דואר אלקטרוני</string>
     <string name="user_free_text">הטיפולים שתירצי / הערות</string>
-    <string name="tobuy">להזמנת תור</string>
+    <string name="tobuy">הזמנת תור</string>
+    <string name="user_first_name">שם פרטי: חובה</string>
+    <string name="user_last_name">שם משפחה: חובה</string>
+    <string name="user_number">מספר נייד: לא חובה</string>
+    <string name="user_email">מייל: לא חובה</string>
+    <string name="alart_title">שלום וברוכים הבאים</string>
+    <string name="photogalary">אלבום תמונות</string>
 
 
 </resources>
